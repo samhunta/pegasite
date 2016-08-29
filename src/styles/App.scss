@@ -1,0 +1,332 @@
+%heroFont {
+  font-size: 2.2rem;
+  line-height: 3.6rem;
+  letter-spacing: -0.02rem;
+}
+
+:local(.container) {
+  max-width: 75rem;
+  padding: 0 5rem;
+  margin: 0 auto;
+}
+
+:local(.header) {
+  @include display-flex();
+  @include flex-direction(row);
+  @include align-items(center);
+  padding: 3rem 0;
+}
+
+:local(.logo) {
+  @include flex(0 0 auto);
+  width: 51px;
+  height: 40px;
+  margin-right: 1.5rem;
+  > span {
+    @include transition(0.12s linear all);
+    background: url('../../public/assets/logo.png');
+    width: 51px;
+    height: 40px;
+    display: block;
+  }
+
+  &:hover > span {
+    @include transform(scaleY(-1));
+  }
+
+  &:active > span {
+    @include filter(grayscale(100%));
+  }
+}
+
+@media screen and (max-width: 601px) {
+  :local(.navigation) {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(255,255,255,0.9);
+    overflow-y: auto;
+    overflow-x: hidden;
+    z-index: 99999;
+    text-align: center;
+
+    .modalCloseBtn {
+      margin-top: 50px;
+      font-size: 60px;
+      @include border-radius(50%);
+      padding: 10px;
+      color: #888;
+      cursor: pointer;
+
+      &:hover, &:active {
+        background-color: $primary-color;
+        color: #fff;
+      }
+
+      &:active {
+        background-color: $primary-light-color;
+      }
+    }
+
+    > ul {
+      margin: 0;
+      list-style-type: none;
+      padding: 50px 0 0;
+      > li {
+        margin: 0;
+        &:not(:last-child) {
+          border-bottom: 1px solid #ccc;
+        }
+        @include transition(0.2s ease-in-out all);
+        display: block;
+        @include translateZ(0);
+        > a, > a:hover, > a:focus {
+          font-size: 2rem;
+          padding: 20px 0;
+          height: 4em;
+          @include translateZ(0);
+          @include transition(0.2s ease-in-out all);
+          display: block;
+          color: #444;
+        }
+        > a:hover, > a:active {
+          @include transform(scale(1.3) translateY(0.24rem));
+          color: #fff;
+        }
+
+        &:hover, &:active {
+          background-color: $secondary-color;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 600px) {
+  :local(.modalCloseBtn) {
+    display: none;
+  }
+
+  :local(.navigation) {
+    @include flex(1 0 auto);
+
+    > ul {
+      @include display-flex();
+      @include flex-direction(row);
+      @include justify-content(flex-start);
+      @include align-items(center);
+      margin: 0;
+      list-style-type: none;
+      > li {
+        @include flex(0 0 auto);
+        display: block;
+        margin: -0.7rem 2rem 0;
+        > a, > :hover, > :focus {
+          @include transition(0.1s linear border-bottom-color, 0.1s linear color);
+          padding-bottom: 5px;
+          border-bottom: 2px solid transparent;
+          color: #333;
+        }
+
+        &:local(.active) > a {
+          border-bottom-color: $secondary-color;
+        }
+
+        > a:hover {
+          border-bottom-color: $primary-color;
+        }
+
+        > a:active, > a:focus {
+          color: $secondary-color;
+          border-bottom-color: $secondary-color;
+        }
+      }
+    }
+  }
+}
+
+:local(.hero) {
+  padding: 0.5rem 0 5rem;
+  p {
+    text-align: justify;
+    @media screen and (max-width: 601px) {
+      text-align: left;
+    }
+    margin: 2.5rem 0;
+    color: #717171;
+    @extend %heroFont;
+  }
+}
+
+:local(.callToAction) {
+  @extend %heroFont;
+  padding-bottom: 5px;
+  border-bottom: 2px solid transparent;
+  @include transition(0.1s linear border-bottom-color, 0.1s linear color);
+
+  &:hover {
+    border-bottom-color: $primary-color;
+  }
+}
+
+:local(.ourClients) {
+  h1 {
+    margin-bottom: 2.5rem;
+  }
+}
+
+:local(.clientList) {
+  composes: columns col-gapless col-multiline from 'spectre.css';
+  border-left: 1px solid #ddd;
+}
+
+:local(.clientView) {
+  composes: col-xs-6 col-sm-3 column from 'spectre.css';
+  @include display-flex();
+  @include flex-direction(row);
+  min-height: 140px;
+}
+
+:local(.clientViewItem) {
+  margin: 2px;
+  @include flex(1 1 50px);
+  @include display-flex();
+  @include flex-direction(column);
+  @include justify-content(center);
+  @include align-items(stretch);
+
+  > span {
+    @include flex(1 1 auto);
+    @include background-size(contain);
+    background-color: #fff;
+    background-position: center center;
+    background-repeat: no-repeat;
+  }
+}
+
+:local(.clientViewDesktop) {
+  composes: clientView;
+  composes: hide-xs from 'spectre.css';
+}
+
+:local(.lineRight) {
+  margin-bottom: 1000px;
+  @include transform(rotate(45deg));
+  border-top: 1px solid #bbb;
+  height: 1px;
+}
+
+:local(.about) {
+  composes: hero;
+  padding-top: 5rem;
+}
+
+:local(.testimonialBrowser) {
+  display: none;
+}
+
+@media screen and (min-width: 600px) {
+
+  :local(.testimonialBrowser) {
+    display: block;
+    padding: 5rem 1rem 1rem;
+    background: #fff;
+    position: relative;
+    left: 40%;
+    float: left;
+    margin-right: 3rem;
+    margin-left: -668px;
+    @include box-shadow(0 0 10px 0 rgba(0,0,0,0.3));
+    @include border-top-radius(5px);
+    &::before {
+      content: '';
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: #d2d2d2;
+      @include box-shadow(
+        -2.2rem 0 0 0 #d2d2d2,
+        -4.4rem 0 0 0 #d2d2d2
+      );
+      @include border-radius(50%);
+      display: block;
+      width: 1.5rem;
+      height: 1.5rem;
+    }
+  }
+
+  :local(.testimonial) {
+    position: relative;
+    min-height: 500px;
+    margin-left: -3rem;
+    &:not(:first-child) {
+      margin-top: -4rem;
+    }
+  }
+
+  :local(.testimonialLeft) {
+    composes: testimonial;
+  }
+
+  :local(.testimonialRight) {
+    composes: testimonial;
+  }
+
+  :local(.testimonials) {
+    composes: hero;
+    padding-left: 0;
+    padding-right: 0;
+    padding-top: 7rem;
+    p {
+      text-align: left;
+    }
+  }
+
+  :local(.testimonialContent) {
+    margin-left: 40%;
+    padding-top: 7.5rem;
+
+    a {
+      color: $primary-light-color;
+      &:hover {
+        color: $secondary-color;
+        border-bottom-color: $secondary-color;
+      }
+    }
+  }
+
+  :local(.testimonialRight) {
+    :local(.testimonialBrowser) {
+      left: auto;
+      float: right;
+      right: 40%;
+      margin-right: -668px;
+      margin-left: 3rem;
+      &::before {
+
+      }
+    }
+
+    :local(.testimonial) {
+      margin-right: -3rem;
+      margin-left: 0;
+    }
+
+    :local(.testimonialContent) {
+      margin-right: 40%;
+      margin-left: 0;
+    }
+  }
+
+  :local(.testimonial:first-child) :local(.testimonialContent) {
+    padding-top: 5rem;
+  }
+
+}
+
+:local(.footer) {
+
+}
