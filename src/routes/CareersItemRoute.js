@@ -45,7 +45,7 @@ export default enhance(({ item }) => (
                       <input type="checkbox" />
                       <span>
                         <MdCheck />
-                        <span className={styles.formCheckListAlt}>
+                        <span className={styles.formChecklistAlt}>
                           +{Math.floor((item.skills.length - itemIndex) * 8)}
                         </span>
                         <span>{careerItem}</span>

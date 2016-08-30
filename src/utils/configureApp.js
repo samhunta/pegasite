@@ -37,10 +37,13 @@ export default function configureApp(env = undefined, dir = 'config') {
   }
 
   return function applyConfig(app) {
+    app.configure = cb => (cb(app), app)
+
     if (queued !== undefined) {
       Object.keys(queued).forEach(key => app.set(key, queued[key]))
       queued = undefined
     }
+
     return app
   }
 }

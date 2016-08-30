@@ -5,6 +5,18 @@ import styles from '../styles/App.scss'
 import Section from '../containers/Section'
 import MdCheck from 'react-icons/lib/md/check'
 
+const services = [
+  'SEO',
+  'Mobile Apps',
+  'eCommerce',
+  'Websites',
+  'SaaS Development',
+  'CRM Development',
+  'CMS Development',
+  'Internet Marketing',
+  'Product Development',
+]
+
 export default () => (
   <div className={styles.appContent}>
     <div className={styles.container}>
@@ -91,7 +103,13 @@ export default () => (
           <div className={styles.container}>
             <div className={styles.testimonialContent}>
               <h3>Bud Theory Cooperative</h3>
-              <p>Cannabis Delivery</p>
+              <p>
+                Our very first customer of our
+                {' '}
+                <a href="https://treesy.co" target="_blank">Treesy</a>
+                {' '}
+                cannabis eCommerce and delivery solutions.
+              </p>
               <a className={styles.callToAction} target="_blank" href="https://budtheory.com/">Visit Bud Theory {'\u2192'}</a>
             </div>
           </div>
@@ -105,7 +123,7 @@ export default () => (
           <div className={styles.container}>
             <div className={styles.testimonialContent}>
               <h3>HulkShare</h3>
-              <p>This job Lorem ipsum dolor sit amet, consectetur adipisicing elit...</p>
+              <p>#1 social hip-hip network serving millions of free listeners new hip-hop, RnB, and other genres.</p>
               <a className={styles.callToAction} target="_blank" href="http://www.hulkshare.com/">Visit HulkShare {'\u2192'}</a>
             </div>
           </div>
@@ -119,7 +137,11 @@ export default () => (
           <div className={styles.container}>
             <div className={styles.testimonialContent}>
               <h3>Zaarly</h3>
-              <p>This job Lorem ipsum dolor sit amet, consectetur adipisicing elit...</p>
+              <p>
+                Next-generation home service provider.
+                If you've stepped on a college campus,
+                you've probably seen one of these t-shirts around.
+              </p>
               <a className={styles.callToAction} target="_blank" href="http://www.zaarly.com/">Visit Zaarly {'\u2192'}</a>
             </div>
           </div>
@@ -130,19 +152,25 @@ export default () => (
       <div className={styles.container}>
         <div className={styles.about}>
           <h1>Services</h1>
+          <p>Just some of the things we do.</p>
           <ul className={styles.formChecklistHero}>
-            <li>
-              <label className={styles.formChecklistItem}>
-                <input checked readOnly type="checkbox" />
-                <span>
-                  <span className={styles.formCheckListAlt}>
-                    <MdCheck />
+            {services.map(service => (
+              <li key={service}>
+                <label className={styles.formChecklistItem}>
+                  <input checked readOnly type="checkbox" />
+                  <span>
+                    <span className={styles.formChecklistAlt}>
+                      <MdCheck />
+                    </span>
+                    <span>{service}</span>
                   </span>
-                  <span>Dinner</span>
-                </span>
-              </label>
-            </li>
+                </label>
+              </li>
+            ))}
           </ul>
+          <Link to="/consultation" className={styles.callToAction}>
+            Receive Estimate {'\u2192'}
+          </Link>
         </div>
       </div>
     </Section>

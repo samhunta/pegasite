@@ -10,17 +10,19 @@ const config = {
   devtool: 'eval',
   contentBase: path.join(DIRNAME, 'public'),
   publicPath: babelConfig.output.publicPath,
-  historyApiFallback: true,
+  historyApiFallback: false,
   progress: true,
   colors: true,
   profile: true,
 }
 
-export default (appInput) => {
-  const app = appInput
-  const appServer = http.createServer(app)
-  const devServer = new WebpackDevServer(webpack(babelConfig), config)
-  devServer.listeningApp = appServer
-  app.listen = devServer.listen.bind(devServer)
-  app.use(devServer.app)
+export default () => {
+  return function devConfigure(appInput) {
+    const app = appInput
+    const appServer = http.createServer(app)
+    const devServer = new WebpackDevServer(webpack(babelConfig), config)
+    devServer.listeningApp = appServer
+    app.listen = devServer.listen.bind(devServer)
+    app.use(devServer.app)
+  }
 }

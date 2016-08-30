@@ -23,7 +23,7 @@ export default () => (
                 <GoFileMedia />
                 logo.png
               </h5>
-              <p>73KB • 361x308</p>
+              <p>67KB • 420x420</p>
             </div>
             <button type="button" className={styles.selectListBtn}>
               Download

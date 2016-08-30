@@ -1,13 +1,14 @@
 import React from 'react'
 import { withState } from 'recompose'
-import styles from '../styles/App.scss'
 import MdClose from 'react-icons/lib/md/close'
 import MdMenu from 'react-icons/lib/md/menu'
 import MdExitToApp from 'react-icons/lib/md/exit-to-app'
 import MediaQuery from 'react-responsive'
 import { Link, IndexLink } from 'react-router'
+import Modal from 'react-modal'
+import styles from '../styles/App.scss'
 
-const enhance = withState('menuVisible', 'toggleMenu', 0)
+const enhance = withState('menuVisible', 'toggleMenu', false)
 
 const Navigation = ({ closeMenu, ...props }) => (
   <nav {...props}>
@@ -23,7 +24,7 @@ const Navigation = ({ closeMenu, ...props }) => (
         <Link activeClassName={styles.active} to="/press">Press Kit</Link>
       </li>
       <li onClick={closeMenu}>
-        <IndexLink activeClassName={styles.active} to="/careers">Careers</IndexLink>
+        <Link activeClassName={styles.active} to="/careers">Careers</Link>
       </li>
       <li onClick={closeMenu}>
         <Link activeClassName={styles.active} to="/consultation">Consultation</Link>
@@ -42,8 +43,14 @@ export default enhance(({ menuVisible, toggleMenu, ...props }) => (
       <div className={styles.headerBox}>
         <IndexLink to="/" className={styles.logo}><span /></IndexLink>
         <MediaQuery maxWidth={601} className={styles.mobileNav}>
-          <Hamburger onClick={() => toggleMenu(1)} />
-          <Navigation closeMenu={() => toggleMenu()} className={menuVisible ? styles.navigation : styles.hideSm} />
+          <Hamburger onClick={() => toggleMenu(true)} />
+          <Modal
+            overlayClassName={styles.modalOverlay}
+            isOpen={menuVisible}
+            onRequestClose={() => toggleMenu(false)}
+          >
+            <Navigation closeMenu={() => toggleMenu(false)} className={styles.navigation} />
+          </Modal>
         </MediaQuery>
         <MediaQuery minWidth={600}>
           <Navigation className={styles.navigation} />
