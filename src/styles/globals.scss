@@ -1,7 +1,5 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat:400,700');
 :global {
-  @import 'spectre.css';
-  @import url('https://fonts.googleapis.com/css?family=Montserrat');
-
   body {
     font-family: 'Montserrat', 'Helvetica Neue', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', 'Hiragino Kaku Gothic Pro', Meiryo, 'Malgun Gothic', sans-serif;
     font-size: $font-size;
@@ -12,7 +10,7 @@
     text-decoration: none;
 
     &:hover {
-      color: $primary-color;
+      color: $link-hover-color;
     }
   }
 

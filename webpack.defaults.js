@@ -80,6 +80,10 @@ const loaders = [
     loader: 'url?limit=10000&mimetype=image/svg+xml',
   },
   {
+    test: /\.txt$/,
+    loader: 'raw',
+  },
+  {
     test: /\.gif/,
     loader: 'url-loader?limit=10000&mimetype=image/gif',
   },

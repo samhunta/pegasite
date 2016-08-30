@@ -10,7 +10,7 @@ const config = {
   devtool: 'eval',
   contentBase: path.join(DIRNAME, 'public'),
   publicPath: babelConfig.output.publicPath,
-  historyApiFallback: false,
+  historyApiFallback: true,
   progress: true,
   colors: true,
   profile: true,

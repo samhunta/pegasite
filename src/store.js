@@ -1,7 +1,6 @@
 import { compose, createStore, applyMiddleware } from 'redux'
 import { syncHistoryWithStore, routerMiddleware } from 'react-router-redux'
 import { browserHistory } from 'react-router'
-import config from './config'
 // import { setSettings } from './actions/contactActions'
 // import { setSettings } from './actions/menuActions'
 import createSagaMiddleware from 'redux-saga'
@@ -30,8 +29,7 @@ export function createRootStore(config) {
         typeof window !== 'undefined' &&
         window.devToolsExtension ?
         window.devToolsExtension() :
-        f => f),
-      autoRehydrate()
+        f => f)
     )
   )
 
@@ -46,8 +44,8 @@ export function createRootStore(config) {
   return rootStore
 }
 
-export default function getRootStore() {
+export function getRootStore() {
   return rootStore
 }
 
-createRootStore({ env: process.env.NODE_ENV })
+export default createRootStore({ env: process.env.NODE_ENV })

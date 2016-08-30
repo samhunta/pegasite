@@ -1,7 +1,97 @@
 %heroFont {
-  font-size: 2.2rem;
+  font-size: 2rem;
   line-height: 3.6rem;
   letter-spacing: -0.02rem;
+}
+
+:local(.section) {
+  padding: 4rem 0 3rem;
+}
+
+@media screen and (max-width: 601px) {
+  :local(.section) {
+    padding: 4rem 0 9rem;
+  }
+}
+
+:local(.formGroup) {
+  composes: form-group from 'spectre.css';
+}
+
+:local(.formInput) {
+  composes: form-input from 'spectre.css';
+}
+
+:local(.formTextarea) {
+  composes: form-input from 'spectre.css';
+}
+
+@media screen and (min-width: 600px) {
+  :local(.formInput) {
+    composes: input-lg from 'spectre.css';
+  }
+
+  :local(.formSelect) {
+    composes: select-lg from 'spectre.css';
+  }
+}
+
+:local(.btnLgPrimary) {
+  composes: btn btn-primary btn-lg from 'spectre.css';
+  svg {
+    margin: -0.4rem 0.4rem 0 0;
+    width: 2rem;
+    height: 2rem;
+  }
+}
+
+:local(.formLabel) {
+  composes: form-label from 'spectre.css';
+}
+
+:local(.formGapped) :local(.formGroup) {
+  padding: 1rem 0;
+}
+
+:local(.formGapped) :local(.formLabel) {
+  margin-bottom: 1rem;
+}
+
+@media screen and (min-width: 600px) {
+  :local(.btnContainer) {
+    composes: formGroup;
+    margin: 1rem 0 5rem;
+
+    :local(.btnLgPrimary) {
+      display: block;
+      width: 100%;
+      height: 7rem;
+    }
+  }
+}
+
+@media screen and (max-width: 601px) {
+  :local(.btnContainer) {
+    padding-top: 10rem;
+    :local(.btnLgPrimary) {
+      height: 10rem;
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      padding: 0;
+      width: 100%;
+      display: block;
+      @include border-radius(0);
+      border-bottom-width: 0;
+      border-left-width: 0;
+      border-right-width: 0;
+    }
+  }
+}
+
+
+:local(.formSelect) {
+  composes: form-select form-input from 'spectre.css';
 }
 
 :local(.container) {
@@ -11,6 +101,32 @@
 }
 
 :local(.header) {
+  @include flex(0 1 auto);
+}
+
+:local(.appContent) {
+  @include flex(1 1 auto);
+}
+
+:local(.appContentFlex) {
+  composes: appContent;
+  @include display-flex();
+  @include flex-direction(column);
+  @include justify-content(flex-start);
+  @include align-items(stretch);
+  @include align-content(stretch);
+  overflow: auto;
+
+  > :first-child {
+    @include flex(1 1 auto);
+  }
+
+  > :last-child {
+    @include flex(0 1 auto);
+  }
+}
+
+:local(.headerBox) {
   @include display-flex();
   @include flex-direction(row);
   @include align-items(center);
@@ -41,7 +157,6 @@
 
 @media screen and (max-width: 601px) {
   :local(.navigation) {
-    display: none;
     position: fixed;
     top: 0;
     left: 0;
@@ -131,10 +246,6 @@
           color: #333;
         }
 
-        &:local(.active) > a {
-          border-bottom-color: $secondary-color;
-        }
-
         > a:hover {
           border-bottom-color: $primary-color;
         }
@@ -143,21 +254,29 @@
           color: $secondary-color;
           border-bottom-color: $secondary-color;
         }
+
+        > a.active {
+          border-bottom-color: $secondary-color;
+        }
       }
     }
   }
 }
 
 :local(.hero) {
-  padding: 0.5rem 0 5rem;
   p {
+    @extend %heroFont;
+    font-weight: 300;
     text-align: justify;
     @media screen and (max-width: 601px) {
       text-align: left;
     }
     margin: 2.5rem 0;
-    color: #717171;
-    @extend %heroFont;
+    color: #616161;
+  }
+
+  h1:first-child {
+    margin-top: 0;
   }
 }
 
@@ -212,6 +331,26 @@
   composes: hide-xs from 'spectre.css';
 }
 
+:local(.rootWrapper) {
+  @include display-flex();
+  @include flex-direction(column);
+  @include align-items(stretch);
+  @include justify-content(flex-start);
+  @include align-content(flex-start);
+  width: 100vw;
+  height: 100vh;
+
+  &:first-child {
+    @include flex(1 1 auto);
+  }
+  &:nth-child(1) {
+
+  }
+  &:last-child {
+    @include flex(1 1 auto);
+  }
+}
+
 :local(.lineRight) {
   margin-bottom: 1000px;
   @include transform(rotate(45deg));
@@ -221,11 +360,20 @@
 
 :local(.about) {
   composes: hero;
-  padding-top: 5rem;
 }
 
 :local(.testimonialBrowser) {
   display: none;
+}
+
+:local(.testimonialContent) {
+  a {
+    color: $primary-light-color;
+    &:hover {
+      color: $secondary-color;
+      border-bottom-color: $secondary-color;
+    }
+  }
 }
 
 @media screen and (min-width: 600px) {
@@ -277,9 +425,10 @@
 
   :local(.testimonials) {
     composes: hero;
+    overflow-x: hidden;
+    padding-top: 1rem;
     padding-left: 0;
     padding-right: 0;
-    padding-top: 7rem;
     p {
       text-align: left;
     }
@@ -288,14 +437,6 @@
   :local(.testimonialContent) {
     margin-left: 40%;
     padding-top: 7.5rem;
-
-    a {
-      color: $primary-light-color;
-      &:hover {
-        color: $secondary-color;
-        border-bottom-color: $secondary-color;
-      }
-    }
   }
 
   :local(.testimonialRight) {
@@ -327,6 +468,131 @@
 
 }
 
+@media screen and (max-width: 601px) {
+  :local(.testimonials) {
+    margin-bottom: -10rem;
+  }
+
+  :local(.testimonial) {
+    padding: 0 0 4rem;
+    overflow: hidden;
+
+    h1 {
+      margin-bottom: 3rem;
+    }
+
+    h3 {
+      font-weight: 400;
+      font-size: 1.8rem;
+      color: #888;
+    }
+    p {
+      font-size: 1.8rem;
+      font-weight: 300;
+    }
+
+    &::after {
+      content: '';
+      display: block;
+      border-bottom: 1px solid #ccc;
+      width: 130%;
+      padding-bottom: 5rem;
+      margin: 5rem 0;
+      @include transform(rotate(-4deg));
+    }
+  }
+
+  :local(.testimonialRight)::before {
+    @include transform(rotate(4deg));
+  }
+}
+
+:local(.selectList) {
+  margin: -5rem 0 0;
+}
+
+:local(.selectListItem) {
+  &:not(:last-child) {
+    border-bottom: 1px solid #ddd;
+  }
+
+  @include display-flex();
+  @include flex-direction(row);
+  @include justify-content(flex-start);
+  @include align-items(center);
+  @include align-content(center);
+  @include flex-wrap(wrap);
+  @include border-radius(5px);
+  border: 1px solid #ddd;
+  margin-bottom: 1rem;
+  padding: 2rem;
+}
+
+:local(.selectListContent) {
+  margin-right: 2rem;
+  @include flex(1 1 auto);
+  h5 {
+    font-weight: 400;
+    margin: 1rem 0 1rem;
+    color: $link-hover-color;
+
+    svg {
+      font-size: 3.2rem;
+      vertical-align: middle;
+      margin-top: -0.5rem;
+      margin-right: 1rem;
+    }
+  }
+
+  p {
+    margin: 0 0 1rem;
+    font-weight: 300;
+    color: #777;
+  }
+}
+
+:local(.selectListBtn) {
+  @include transition(0.1s ease-in-out all);
+  composes: btn from 'spectre.css';
+  @include flex(0 1 1rem);
+  margin: 2rem 0;
+
+  &, &:focus {
+    background-color: #fff;
+  }
+}
+
+:local(.selectListItem):hover,
+:local(.selectListItem):focus,
+:local(.selectListItem):active, {
+  background-color: #f3f4fb;
+  border-color: $primary-light-color + #444;
+
+  &:hover .selectListBtn {
+    background-color: $btn-hover-color;
+    color: #fff;
+  }
+
+  .selectListBtn {
+    color: $primary-color + #111;
+  }
+}
+
+:local(.selectListCompact) {
+  composes: selectList;
+  :local(.selectListItem) {
+    padding: 1rem 2rem;
+  }
+
+  :local(.selectListBtn) {
+    margin: 0.5rem 0;
+  }
+}
+
 :local(.footer) {
 
+}
+
+:local(.hideSm) {
+  composes: hide-sm hide-xs from 'spectre.css';
 }

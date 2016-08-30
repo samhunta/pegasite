@@ -1,12 +1,10 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import App from './containers/App'
-import './store'
+import Router from './containers/Router'
+import store from './store'
 import './styles'
 
-const history = store.getHistory()
-
 ReactDOM.render(
-  <App />,
+  <Router />,
   document.getElementById('root')
 )
