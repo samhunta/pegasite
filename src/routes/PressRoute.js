@@ -8,13 +8,14 @@ import GoFileMedia from 'react-icons/lib/go/file-media'
 export default () => (
   <div className={styles.appContent}>
     <div className={styles.container}>
-      <Section>
+      <Section sm>
         <div className={styles.hero}>
           <h1>Press Kit</h1>
           <p>Images, documents, resources, etc.</p>
         </div>
       </Section>
-      <Section>
+      <Section sm>
+        <h4>Downloads</h4>
         <div className={styles.selectListCompact}>
           <a href="/press-kit/logo.png" target="_blank" className={styles.selectListItem}>
             <div className={styles.selectListContent}>

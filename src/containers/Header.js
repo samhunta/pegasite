@@ -2,28 +2,30 @@ import React from 'react'
 import { withState } from 'recompose'
 import styles from '../styles/App.scss'
 import MdClose from 'react-icons/lib/md/close'
+import MdMenu from 'react-icons/lib/md/menu'
+import MdExitToApp from 'react-icons/lib/md/exit-to-app'
 import MediaQuery from 'react-responsive'
 import { Link, IndexLink } from 'react-router'
 
 const enhance = withState('menuVisible', 'toggleMenu', 0)
 
-const Navigation = (props) => (
+const Navigation = ({ closeMenu, ...props }) => (
   <nav {...props}>
-    <MdClose className={styles.modalCloseBtn} />
+    <MdClose className={styles.modalCloseBtn} onClick={closeMenu} />
     <ul>
-      <li>
+      <li onClick={closeMenu}>
         <IndexLink activeClassName={styles.active} to="/">About</IndexLink>
       </li>
-      <li>
-        <a href="https://github.com/pegabyte" target="_blank">Code</a>
+      <li onClick={closeMenu}>
+        <a href="https://github.com/pegabyte" target="_blank">Code <MdExitToApp /></a>
       </li>
-      <li>
+      <li onClick={closeMenu}>
         <Link activeClassName={styles.active} to="/press">Press Kit</Link>
       </li>
-      <li>
-        <Link activeClassName={styles.active} to="/careers">Careers</Link>
+      <li onClick={closeMenu}>
+        <IndexLink activeClassName={styles.active} to="/careers">Careers</IndexLink>
       </li>
-      <li>
+      <li onClick={closeMenu}>
         <Link activeClassName={styles.active} to="/consultation">Consultation</Link>
       </li>
     </ul>
@@ -31,7 +33,7 @@ const Navigation = (props) => (
 )
 
 const Hamburger = (props) => (
-  <div {...props} className={styles.hamburger} />
+  <MdMenu {...props} className={styles.hamburger} />
 )
 
 export default enhance(({ menuVisible, toggleMenu, ...props }) => (
@@ -39,9 +41,9 @@ export default enhance(({ menuVisible, toggleMenu, ...props }) => (
     <div className={styles.container}>
       <div className={styles.headerBox}>
         <IndexLink to="/" className={styles.logo}><span /></IndexLink>
-        <MediaQuery maxWidth={601}>
+        <MediaQuery maxWidth={601} className={styles.mobileNav}>
           <Hamburger onClick={() => toggleMenu(1)} />
-          <Navigation className={menuVisible ? styles.navigation : styles.hideSm} />
+          <Navigation closeMenu={() => toggleMenu()} className={menuVisible ? styles.navigation : styles.hideSm} />
         </MediaQuery>
         <MediaQuery minWidth={600}>
           <Navigation className={styles.navigation} />

@@ -3,6 +3,7 @@ import MediaQuery from 'react-responsive'
 import { Link } from 'react-router'
 import styles from '../styles/App.scss'
 import Section from '../containers/Section'
+import MdCheck from 'react-icons/lib/md/check'
 
 export default () => (
   <div className={styles.appContent}>
@@ -81,11 +82,6 @@ export default () => (
     </div>
     <Section>
       <div className={styles.testimonials}>
-        <MediaQuery maxWidth={601}>
-          <div className={styles.container}>
-            <h1>Testimonials</h1>
-          </div>
-        </MediaQuery>
         <div className={styles.testimonialLeft}>
           <MediaQuery minWidth={800}>
             <div className={styles.testimonialBrowser}>
@@ -95,7 +91,7 @@ export default () => (
           <div className={styles.container}>
             <div className={styles.testimonialContent}>
               <h3>Bud Theory Cooperative</h3>
-              <p>This job Lorem ipsum dolor sit amet, consectetur adipisicing elit...</p>
+              <p>Cannabis Delivery</p>
               <a className={styles.callToAction} target="_blank" href="https://budtheory.com/">Visit Bud Theory {'\u2192'}</a>
             </div>
           </div>
@@ -134,7 +130,19 @@ export default () => (
       <div className={styles.container}>
         <div className={styles.about}>
           <h1>Services</h1>
-          <p>We offer </p>
+          <ul className={styles.formChecklistHero}>
+            <li>
+              <label className={styles.formChecklistItem}>
+                <input checked readOnly type="checkbox" />
+                <span>
+                  <span className={styles.formCheckListAlt}>
+                    <MdCheck />
+                  </span>
+                  <span>Dinner</span>
+                </span>
+              </label>
+            </li>
+          </ul>
         </div>
       </div>
     </Section>

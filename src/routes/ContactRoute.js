@@ -1,5 +1,5 @@
 import React from 'react'
-import AndroidSend from 'react-icons/lib/io/android-send'
+import IoAndroidSend from 'react-icons/lib/io/android-send'
 import styles from '../styles/App.scss'
 import Section from '../containers/Section'
 import MediaQuery from 'react-responsive'
@@ -19,14 +19,8 @@ export default () => (
             <input type="text" className={styles.formInput} />
           </div>
           <div className={styles.formGroup}>
-            <label className={styles.formLabel}>Were Your Parents Human?</label>
-            <select defaultValue="" className={styles.formSelect}>
-              <option value="" disabled>–––––</option>
-              <option value="beep-boop">Beep Boop</option>
-              <option value="destroy-humans">Woof Woof</option>
-              <option value="meow">Meow</option>
-              <option value="yes">Yeah</option>
-            </select>
+            <label className={styles.formLabel}>Email</label>
+            <input type="email" className={styles.formInput} />
           </div>
           <div className={styles.formGroup}>
             <label className={styles.formLabel}>Describe Your Project</label>
@@ -36,10 +30,20 @@ export default () => (
               className={styles.formTextarea}
             ></textarea>
           </div>
+          <div className={styles.formGroup}>
+            <label className={styles.formLabel}>Were Your Parents Human?</label>
+            <select defaultValue="" className={styles.formSelect}>
+              <option value="" disabled>–––––</option>
+              <option value="beep-boop">Beep Boop</option>
+              <option value="destroy-humans">Woof Woof</option>
+              <option value="meow">Meow</option>
+              <option value="yes">Sure</option>
+            </select>
+          </div>
           <MediaQuery minWidth={600}>
             <div className={styles.btnContainer}>
               <button type="submit" className={styles.btnLgPrimary}>
-                <AndroidSend />
+                <IoAndroidSend />
                 Done
               </button>
             </div>
@@ -50,7 +54,7 @@ export default () => (
     <MediaQuery maxWidth={601}>
       <div className={styles.btnContainer}>
         <button type="submit" className={styles.btnLgPrimary}>
-          <AndroidSend />
+          <IoAndroidSend />
           Done
         </button>
       </div>
