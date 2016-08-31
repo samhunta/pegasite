@@ -1,6 +1,7 @@
 import path from 'path'
 import webpack from 'webpack'
 import ExtractTextPlugin from 'extract-text-webpack-plugin'
+import CopyWebpackPlugin from 'copy-webpack-plugin'
 
 const SRC_DIR = path.join(__dirname, 'src')
 
@@ -31,6 +32,10 @@ const resolve = {
 }
 
 const plugins = [
+  new CopyWebpackPlugin([{
+    from: 'public/',
+    to: 'dist/',
+  }]),
   CSSPlugin,
   new webpack.EnvironmentPlugin([
     'NODE_ENV',

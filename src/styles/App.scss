@@ -79,7 +79,7 @@
   }
 }
 
-@media screen and (max-width: 601px) {
+@media screen and (min-height: 501px) and (max-width: 601px) {
   :local(.btnContainer) {
     padding-top: 10rem;
     :local(.btnLgPrimary) {
